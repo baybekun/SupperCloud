@@ -19,7 +19,7 @@
         </ul>
         <hr />
         <ul>
-          <li><NuxtLink to="/profile">Profile</NuxtLink></li>
+          <li @click="showProfileModal">Profile</li>
         </ul>
         <hr />
         <ul>
@@ -27,13 +27,18 @@
         </ul>
       </div>
     </div>
+
+    <ProfileModal
+      v-if="isProfileModalVisible"
+      @close="isProfileModalVisible = false"
+    />
   </div>
 </template>
 
 <script>
 // check xem tk này đã nạp vip chưa
 import { ref, onMounted } from "vue";
-
+import ProfileModal from "./ProfileModal.vue";
 const isFormSuccess = ref(false);
 
 onMounted(() => {
@@ -44,12 +49,8 @@ export default {
   data() {
     return {
       showDropdown: false,
+      isProfileModalVisible: false,
     };
-  },
-  methods: {
-    toggleDropdown() {
-      this.showDropdown = !this.showDropdown;
-    },
   },
   mounted() {
     document.addEventListener("click", this.handleClickOutside);
@@ -60,6 +61,10 @@ export default {
   methods: {
     toggleDropdown() {
       this.showDropdown = !this.showDropdown;
+    },
+    showProfileModal() {
+      this.isProfileModalVisible = true;
+      this.showDropdown = false;
     },
     handleClickOutside(event) {
       if (!this.$el.contains(event.target)) {
