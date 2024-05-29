@@ -154,7 +154,7 @@ export default {
   padding: 5px;
   font-family: "Inria Serif", serif;
 }
-.action {
+.actions {
   text-align: center;
 }
 .actions button {
