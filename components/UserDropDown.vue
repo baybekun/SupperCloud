@@ -5,16 +5,21 @@
         <li @click="toggleDropdown">
           <i class="fa-regular fa-circle-user"></i>
           <span> User </span>
+          <!-- kiểm tra tk thường hay vip, biến này lấy bên trang profile -->
+          <div v-if="isFormSuccess">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <!-- end -->
           <i class="fa-solid fa-caret-right"></i>
         </li>
       </ul>
       <div v-if="showDropdown" class="show-dropdown">
         <ul>
-          <li><NuxtLink to="/profile">Profile</NuxtLink></li>
+          <li><NuxtLink to="/updateaccount">Update</NuxtLink></li>
         </ul>
         <hr />
         <ul>
-          <li><NuxtLink to="/help">Help</NuxtLink></li>
+          <li><NuxtLink to="/profile">Profile</NuxtLink></li>
         </ul>
         <hr />
         <ul>
@@ -26,6 +31,15 @@
 </template>
 
 <script>
+// check xem tk này đã nạp vip chưa
+import { ref, onMounted } from "vue";
+
+const isFormSuccess = ref(false);
+
+onMounted(() => {
+  isFormSuccess.value = localStorage.getItem("formSuccess") === "true";
+});
+// end
 export default {
   data() {
     return {
